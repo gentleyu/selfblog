@@ -1,0 +1,30 @@
+1. install时测试用例不通过
+ - 用 -DskipTests 跳过测试用例测试
+2. install时 maven编译web项目显示“软件包 javax.servlet.http 不存在"
+ - 这是由于缺少servlet-api.jar包，其实tomcat下有，但是在Java build path把他加载过来，还是报这个错误，所以我们直接在pom.xml里面加入这个jar包即可，加入的代码如下:
+ 
+  ``` 
+  <dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>servlet-api</artifactId>
+    <version>2.5</version>
+    <scope>provided</scope>
+</dependency>
+ ``` 
+ 
+3. 发布时出现
+Caused by: org.apache.maven.plugin.MojoExecutionException: Deployment failed: repository element was not specified in the POM inside distributionManagement element or in -DaltDeploymentRepository=id::layout::url parameter
+ - 解决方法
+ - 添加 distributionManagement 标签，制定发布路径
+
+4. 当项目本地架包与远程私服不一致时，需要将本地架包上传至远程，可以在eclipse->选择项目->右键选择maven->select  maven Profiles，选择工程setting.xml，确定即可
+
+5. 类路径或引导类路径中找不到程序包 java.lang 类似错误的一种解决方法 在maven-compiler-plugin配置项中添加编译参数
+
+```
+<compilerArguments>
+	<verbose />
+	<bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar;</bootclasspath>				
+</compilerArguments>
+```
+* linux(unix)下将bootclasspath参数分隔符改成冒号,windows为分号
