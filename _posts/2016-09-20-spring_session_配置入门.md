@@ -1,6 +1,6 @@
 ## spring session 配置入门
 
-#### [官方配置在线文档](http://25.io/smaller/)
+#### [官方配置在线文档](http://docs.spring.io/spring-session/docs/1.2.2.RELEASE/reference/html5/)
 
 ##### pom.xml
 ```
